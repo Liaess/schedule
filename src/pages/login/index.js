@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import UserContext from "../../context/user";
 import { InputInformation, MainPageLabel } from "./data/labels";
 import { ThreeDots } from "react-loader-spinner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   MainContainer,
   ContainerText,
@@ -13,6 +13,7 @@ import {
   InputGroup,
 } from "./styles";
 import useApi from "../../hooks/useApi";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const {
@@ -27,14 +28,29 @@ export default function Login() {
     },
   });
   const [disable, setDisable] = useState(false);
+  const { setUserData } = useContext(UserContext);
   const api = useApi();
+  const navigate = useNavigate();
 
   function submitHandler(data) {
     setDisable(true);
-    api.user.signIn(data).then(({ data }) => {
-      setDisable(false);
-      // setUserData(data.token);
-    });
+    api.user
+      .signIn(data)
+      .then(({ data }) => {
+        setDisable(false);
+        setUserData(data.token);
+        navigate("/schedule");
+      })
+      .catch((err) => {
+        setDisable(false);
+        if (err.response.status) {
+          toast(err.response.data.error);
+        }
+        reset({
+          email: "",
+          password: "",
+        });
+      });
   }
 
   return (

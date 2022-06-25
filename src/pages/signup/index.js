@@ -33,6 +33,9 @@ export default function Register() {
   const navigate = useNavigate();
 
   function submitHandler(data) {
+    if (data.password !== data.confirmPassword) {
+      return toast("Passwords don't match!");
+    }
     setDisable(true);
     api.user
       .signUp(data)
@@ -43,7 +46,7 @@ export default function Register() {
       })
       .catch((err) => {
         setDisable(false);
-        if (err.response.status === 409) {
+        if (err.response.status) {
           toast(err.response.data.error);
         }
         reset({
