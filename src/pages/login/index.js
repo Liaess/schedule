@@ -1,5 +1,3 @@
-import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import React, { useContext, useState } from "react";
 import UserContext from "../../context/user";
 import { InputInformation, MainPageLabel } from "./data/labels";
@@ -10,46 +8,41 @@ import {
   ContainerText,
   Form,
   Button,
+  TextField,
   InputGroup,
 } from "./styles";
 import useApi from "../../hooks/useApi";
 import { toast } from "react-toastify";
 
 export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
   const [disable, setDisable] = useState(false);
   const { setUserData } = useContext(UserContext);
   const api = useApi();
   const navigate = useNavigate();
+  const [fetchData, setFetchData] = useState({
+    email: "",
+    password: "",
+  });
 
-  function submitHandler(data) {
+  function submitHandler(event) {
+    event.preventDefault();
     setDisable(true);
     api.user
-      .signIn(data)
+      .signIn(fetchData)
       .then(({ data }) => {
         setDisable(false);
-        setUserData(data.token);
+        setUserData(data);
         navigate("/schedule");
       })
       .catch((err) => {
         setDisable(false);
-        if (err.response.status) {
-          toast(err.response.data.error);
-        }
-        reset({
+        setFetchData({
           email: "",
           password: "",
         });
+        if (err.response.status) {
+          toast(err.response.data.error);
+        }
       });
   }
 
@@ -60,20 +53,17 @@ export default function Login() {
         <h2>{MainPageLabel.subTitle.first}</h2>
         <h2>{MainPageLabel.subTitle.second}</h2>
       </ContainerText>
-      <Form onSubmit={handleSubmit(submitHandler)}>
-        {InputInformation.map((input, index) => (
-          <InputGroup key={index}>
-            <input
-              id={input.id}
+      <Form onSubmit={submitHandler}>
+        {InputInformation.map((input) => (
+          <InputGroup key={input.id}>
+            <TextField
               type={input.type}
-              disabled={disable}
               placeholder={input.placeholder}
-              {...register(`${input.htmlFor}`, { required: input.error })}
-            ></input>
-            <ErrorMessage
-              errors={errors}
-              name={input.htmlFor}
-              render={({ message }) => <span>{message}</span>}
+              required
+              disabled={disable}
+              onChange={(e) =>
+                setFetchData({ ...fetchData, [input.id]: e.target.value })
+              }
             />
           </InputGroup>
         ))}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TextField as MuiTextField } from "@mui/material";
 
 export const MainContainer = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ export const ContainerText = styled.div`
       padding-bottom: 25px;
     }
   }
-  @media (max-width: 455px){
+  @media (max-width: 455px) {
     h1 {
       font-size: 2.75rem;
       padding-top: 15px;
@@ -59,7 +60,7 @@ export const Form = styled.form`
   align-items: center;
   flex-direction: column;
   font-family: "Oswald";
-  color: var(--main-font-color);
+  color: var(--secondary-theme);
   p {
     padding-top: 20px;
     color: var(--white-color);
@@ -75,46 +76,22 @@ export const Form = styled.form`
 `;
 
 export const InputGroup = styled.div`
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  input {
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+export const TextField = styled(MuiTextField)`
     width: 80%;
-    height: 65px;
-    border-radius: 6px;
-    outline: none;
-    border: none;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    font-weight: 700;
-    font-size: 1.688rem;
-    :focus {
-      border: 3px solid var(--main-theme);
-    }
-    :disabled {
-      cursor: default;
-      background-color: var(--disable-button);
-      filter: brightness(1);
-    }
-  }
-  span {
-    color: var(--white-color);
-    padding: 0px 0px 12px 0px;
-    align-self: left;
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-  @media (max-width: 700px) {
-    span {
-      font-size: 0.938rem;
-    }
+  input {
+    color: var(--black-color);
   }
 `;
 
 export const Button = styled.button`
   width: 80%;
-  height: 65px;
+  height: 45px;
   background-color: var(--main-theme);
   border-radius: 6px;
   font-family: "Oswald";

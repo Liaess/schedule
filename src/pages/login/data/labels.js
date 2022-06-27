@@ -5,22 +5,20 @@ export const MainPageLabel = {
     second: "the best agenda on the web",
   },
   switchPage: "First time? Create an account!",
-  buttonLabel: "Login"
+  buttonLabel: "Login",
 };
 
 export const InputInformation = [
   {
     htmlFor: "email",
     id: "email",
-    type: "text",
+    type: "email",
     placeholder: "E-mail here",
-    error: "E-mail field its empty!",
   },
   {
     htmlFor: "password",
     id: "password",
     type: "password",
     placeholder: "Password here",
-    error: "Password field its empty!",
   },
 ];

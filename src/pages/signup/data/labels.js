@@ -19,7 +19,7 @@ export const InputInformation = [
   {
     htmlFor: "email",
     id: "email",
-    type: "text",
+    type: "email",
     placeholder: "E-mail here",
     error: "E-mail field its empty!",
   },

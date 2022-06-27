@@ -4,9 +4,9 @@ const GlobalStyles = createGlobalStyle`
 
 :root {
   --main-theme: #1F497D;
-  --secondary-theme: #333;
+  --secondary-theme:#9f9f9f;
   --white-color: #fff;
-  --main-font-color: #9f9f9f;
+  --black-color: #000;
   --disable-button: #D3D3D3
 }
 
