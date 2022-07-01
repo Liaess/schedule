@@ -30,8 +30,9 @@ export default function CreateEventModal({
       return toast("Start date must be before end date!");
     }
     setDisable(true);
+    const parsedUserData = JSON.parse(userData);
     api.events
-      .createEvent(fetchData, userData.token)
+      .createEvent(fetchData, parsedUserData.token)
       .then((_res) => {
         setDisable(false);
         setCreateModalIsOpen(false);

@@ -31,7 +31,7 @@ export default function Login() {
       .signIn(fetchData)
       .then(({ data }) => {
         setDisable(false);
-        setUserData(data);
+        setUserData(JSON.stringify(data));
         navigate("/schedule");
       })
       .catch((err) => {

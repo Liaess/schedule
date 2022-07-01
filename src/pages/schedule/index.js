@@ -21,8 +21,9 @@ export default function Schedule() {
 
   function getEvents() {
     setLoading(false);
+    const parsedUserData = JSON.parse(userData);
     api.events
-      .getEvents(userData.token)
+      .getEvents(parsedUserData.token)
       .then(({ data }) => {
         const convertedDates = data.map((each) => {
           return {
@@ -56,8 +57,9 @@ export default function Schedule() {
       denyButtonText: "Edit it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        const parsedUserData = JSON.parse(userData);
         api.events
-          .deleteEvent(data.id, userData.token)
+          .deleteEvent(data.id, parsedUserData.token)
           .then(() => {
             Swal.fire("Deleted!", "Your event has been deleted.", "success");
             getEvents();

@@ -35,8 +35,9 @@ export default function EditEventModal({
       return toast("Start date must be before end date");
     }
     setDisable(true);
+    const parsedUserData = JSON.parse(userData);
     api.events
-      .updateEvent(selectedEvent.id, fetchData, userData.token)
+      .updateEvent(selectedEvent.id, fetchData, parsedUserData.token)
       .then(() => {
         setDisable(false);
         toast("Event updated successfully!");
