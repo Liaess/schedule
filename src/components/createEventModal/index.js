@@ -32,7 +32,7 @@ export default function CreateEventModal({
     setDisable(true);
     const parsedUserData = JSON.parse(userData);
     api.events
-      .createEvent(fetchData, parsedUserData.token)
+      .createEvent(fetchData, parsedUserData?.token)
       .then((_res) => {
         setDisable(false);
         setCreateModalIsOpen(false);

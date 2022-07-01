@@ -23,7 +23,7 @@ export default function Schedule() {
     setLoading(false);
     const parsedUserData = JSON.parse(userData);
     api.events
-      .getEvents(parsedUserData.token)
+      .getEvents(parsedUserData?.token)
       .then(({ data }) => {
         const convertedDates = data.map((each) => {
           return {
@@ -59,7 +59,7 @@ export default function Schedule() {
       if (result.isConfirmed) {
         const parsedUserData = JSON.parse(userData);
         api.events
-          .deleteEvent(data.id, parsedUserData.token)
+          .deleteEvent(data.id, parsedUserData?.token)
           .then(() => {
             Swal.fire("Deleted!", "Your event has been deleted.", "success");
             getEvents();
@@ -77,7 +77,7 @@ export default function Schedule() {
   return (
     <Main>
       <Header>
-        <p>{userData?.name}&rsquo;s Schedule</p>
+        <p>{JSON.parse(userData)?.name}&rsquo;s Schedule</p>
         <button onClick={() => setCreateModalIsOpen(true)}>Create</button>
         <button>Logout</button>
       </Header>

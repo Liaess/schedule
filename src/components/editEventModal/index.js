@@ -37,7 +37,7 @@ export default function EditEventModal({
     setDisable(true);
     const parsedUserData = JSON.parse(userData);
     api.events
-      .updateEvent(selectedEvent.id, fetchData, parsedUserData.token)
+      .updateEvent(selectedEvent.id, fetchData, parsedUserData?.token)
       .then(() => {
         setDisable(false);
         toast("Event updated successfully!");
