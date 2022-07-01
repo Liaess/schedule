@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 
-export default function validateMethod(navigate, userData, setUserData) {
-  const parsedUserData = JSON.parse(userData);
+export default function validateMethod(navigate, parsedUserData, setUserData) {
   const validations = allValidations(parsedUserData);
 
   window.onstorage = (event) => {
@@ -25,7 +24,7 @@ function allValidations(parsedUserData) {
     {
       to: "/",
       check: parsedUserData?.token,
-      message: "Por favor, faça login!",
+      message: "Please login to continue!",
     },
   ];
 }

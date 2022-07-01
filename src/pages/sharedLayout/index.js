@@ -9,12 +9,16 @@ export default function SharedLayout() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { userData, setUserData } = useContext(UserContext);
+  const parsedUserData = JSON.parse(userData);
 
   useEffect(() => {
+    if (pathname === "/" && parsedUserData?.token) {
+      return navigate("/schedule");
+    }
     if (pathname === "/") return;
-    validateMethod(navigate, userData, setUserData);
+    validateMethod(navigate, parsedUserData, setUserData);
   }, [pathname, api]);
-  
+
   return (
     <>
       <Outlet />
