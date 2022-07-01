@@ -40,9 +40,7 @@ export default function Login() {
           email: "",
           password: "",
         });
-        if (err.response.status) {
-          toast(err.response.data.error);
-        }
+        toast(err.response?.data?.error);
       });
   }
 
@@ -57,8 +55,9 @@ export default function Login() {
         {InputInformation.map((input) => (
           <InputGroup key={input.id}>
             <TextField
+              value={fetchData[input.id]}
               type={input.type}
-              placeholder={input.placeholder}
+              label={input.label}
               required
               disabled={disable}
               onChange={(e) =>

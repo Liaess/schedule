@@ -1,6 +1,6 @@
 export const MainPageLabel = {
-  title: "Create a new event",
-  submitLabel: "Create",
+  title: "Edit selected event",
+  submitLabel: "Edit",
   abortLabel: "Cancel",
 };
 

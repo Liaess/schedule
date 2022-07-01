@@ -63,9 +63,9 @@ export const Form = styled.form`
   color: var(--secondary-theme);
   p {
     padding-top: 20px;
-    color: var(--white-color);
+    color: var(--main-theme);
     font-size: 1.3rem;
-    border-bottom: 1px solid var(--white-color);
+    border-bottom: 1px solid var(--main-theme);
   }
   @media (max-width: 800px) {
     width: 100%;
@@ -83,9 +83,9 @@ export const InputGroup = styled.div`
 `;
 
 export const TextField = styled(MuiTextField)`
-    width: 80%;
+  width: 80%;
   input {
-    color: var(--black-color);
+    color: var(--main-theme);
   }
 `;
 

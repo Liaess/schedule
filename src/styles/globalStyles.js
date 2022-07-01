@@ -4,10 +4,12 @@ const GlobalStyles = createGlobalStyle`
 
 :root {
   --main-theme: #1F497D;
-  --secondary-theme:#9f9f9f;
+  --secondary-theme:#F9F2ED;
   --white-color: #fff;
   --black-color: #000;
-  --disable-button: #D3D3D3
+  --disable-button: #D3D3D3;
+  --confirmButtonColor: #3085d6;
+  --denyButtonColor: #d33;
 }
 
 a{

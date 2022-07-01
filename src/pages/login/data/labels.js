@@ -13,12 +13,12 @@ export const InputInformation = [
     htmlFor: "email",
     id: "email",
     type: "email",
-    placeholder: "E-mail here",
+    label: "E-mail here",
   },
   {
     htmlFor: "password",
     id: "password",
     type: "password",
-    placeholder: "Password here",
+    label: "Password here",
   },
 ];

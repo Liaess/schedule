@@ -19,16 +19,15 @@ export default function CreateEventModal({
   const [disable, setDisable] = useState(false);
   const [fetchData, setFetchData] = useState({
     title: "",
-    description: "",
-    startDate: null,
-    endDate: null,
+    start: null,
+    end: null,
   });
   const api = useApi();
 
   function submitHandler(event) {
     event.preventDefault();
-    if (fetchData.startDate?._d >= fetchData.endDate?._d) {
-      return toast("Start date must be before end date");
+    if (fetchData.start >= fetchData.end) {
+      return toast("Start date must be before end date!");
     }
     setDisable(true);
     api.events
@@ -40,31 +39,31 @@ export default function CreateEventModal({
       })
       .catch((err) => {
         setDisable(false);
-        if (err.response.status) {
-          toast(err.response.data.error);
-        }
+        toast(err.response?.data?.error);
         setFetchData({
           title: "",
-          description: "",
-          startDate: null,
-          endDate: null,
+          start: null,
+          end: null,
         });
       });
   }
 
   return (
-    <ModalStyle isOpen={createModalIsOpen} contentLabel="Create Modal">
+    <ModalStyle
+      isOpen={createModalIsOpen}
+      ariaHideApp={false}
+      contentLabel="Create Modal"
+    >
       <h2>{MainPageLabel.title}</h2>
       <Form onSubmit={submitHandler}>
-        {InputInformation.map((input, index) => (
-          <InputGroup key={index}>
+        {InputInformation.map((input) => (
+          <InputGroup key={input.id}>
             <TextField
               id={input.id}
               type={input.type}
-              placeholder={input.placeholder}
+              label={input.label}
               required
               disable={disable}
-              autoComplete="true"
               value={fetchData[input.id]}
               disabled={disable}
               onChange={(e) =>
@@ -75,18 +74,18 @@ export default function CreateEventModal({
         ))}
         {ClockInformation.map((clockInfo) => (
           <LocalizationProvider
-            key={clockInfo}
+            key={clockInfo.id}
             adapterLocale={"en"}
             dateAdapter={AdapterMoment}
           >
             <DateTimePicker
               value={fetchData[clockInfo.id]}
-              disable={disable}
+              disabled={disable}
               disablePast
               required
               label={clockInfo.label}
               onChange={(value) =>
-                setFetchData({ ...fetchData, [clockInfo.id]: value })
+                setFetchData({ ...fetchData, [clockInfo.id]: value._d })
               }
               renderInput={(props) => (
                 <TextField type={"datetime-local"} required {...props} />

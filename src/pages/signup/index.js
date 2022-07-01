@@ -39,9 +39,7 @@ export default function Register() {
       })
       .catch((err) => {
         setDisable(false);
-        if (err.response.status) {
-          toast(err.response.data.error);
-        }
+        toast(err.response?.data?.error);
         setFetchData({
           name: "",
           email: "",
@@ -63,9 +61,8 @@ export default function Register() {
           <InputGroup key={input.id}>
             <TextField
               type={input.type}
-              placeholder={input.placeholder}
+              label={input.label}
               required
-              autoComplete="true"
               value={fetchData[input.id]}
               disabled={disable}
               onChange={(e) =>
