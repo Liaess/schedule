@@ -8,16 +8,18 @@ import useApi from "../../hooks/useApi";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import EditEventModal from "../../components/editEventModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Schedule() {
   const localizer = momentLocalizer(moment);
-  const { userData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([]);
   const api = useApi();
+  const navigate = useNavigate();
 
   function getEvents() {
     setLoading(false);
@@ -74,12 +76,20 @@ export default function Schedule() {
     });
   }
 
+  function logout() {
+    const parsedUserData = JSON.parse(userData);
+    api.user.signOut(parsedUserData?.token).then(() => {
+      setUserData();
+      navigate("/");
+    });
+  }
+
   return (
     <Main>
       <Header>
         <p>{JSON.parse(userData)?.name}&rsquo;s Schedule</p>
         <button onClick={() => setCreateModalIsOpen(true)}>Create</button>
-        <button>Logout</button>
+        <button onClick={logout}>Logout</button>
       </Header>
       {createModalIsOpen && (
         <CreateEventModal

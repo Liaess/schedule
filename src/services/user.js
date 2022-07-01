@@ -7,4 +7,15 @@ export default class User {
   signIn(fetchData) {
     return api.post("/users/login", fetchData);
   }
+  signOut(token) {
+    return api.post(
+      "/users/logout",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
 }
