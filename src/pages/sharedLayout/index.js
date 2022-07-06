@@ -15,7 +15,7 @@ export default function SharedLayout() {
     if (pathname === "/" && parsedUserData?.token) {
       return navigate("/schedule");
     }
-    if (pathname === "/") return;
+    if (pathname === "/" || pathname === "/signup") return;
     validateMethod(navigate, parsedUserData, setUserData);
   }, [pathname, api]);
 
