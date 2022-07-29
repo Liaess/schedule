@@ -17,7 +17,7 @@ function useLocalStorage(key, initialValue) {
     try {
       if (!value) {
         setStoredValue(null);
-        localStorage.removeItem("token");
+        localStorage.removeItem(key);
         return;
       }
       const valueToStore =
