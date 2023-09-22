@@ -11,7 +11,7 @@ export function iconResolver({
   color,
   height,
   width,
-}: IconResolverProps) {
+}: IconResolverProps): JSX.Element | null {
   switch (icon) {
     case IconsResolver["threeDots"]:
       return (
