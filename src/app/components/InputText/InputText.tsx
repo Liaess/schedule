@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import { HTMLAttributes } from "react";
 
 export type InputTypeProps = HTMLAttributes<HTMLInputElement> & {
-  type: "text" | "number" | "email" | "password";
+  type: "text" | "number" | "email" | "current-password";
   label: string;
   value: string | number;
   name: string;

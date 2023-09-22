@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Button, ButtonProps } from "..";
+import { Button, ButtonProps, ButtonRoles } from "..";
 import { IconsResolverTestId } from "@/types/IconsResolver";
 
 const mockOnClick = jest.fn();
@@ -28,7 +28,7 @@ describe("<Button />", () => {
   it("should perform action on click", async () => {
     const { user } = renderComponent("", { onClick: mockOnClick });
 
-    const button = screen.getByRole("button");
+    const button = screen.getByRole(ButtonRoles.button);
     await user.click(button);
 
     expect(mockOnClick).toBeCalledTimes(1);
@@ -41,7 +41,7 @@ describe("<Button />", () => {
   it("should be disabled", () => {
     renderComponent("", { disabled: true });
 
-    const button = screen.getByRole("button");
+    const button = screen.getByRole(ButtonRoles.button);
 
     expect(button).toBeDisabled();
   });
@@ -52,7 +52,7 @@ describe("<Button />", () => {
       disabled: true,
     });
 
-    const button = screen.getByRole("button");
+    const button = screen.getByRole(ButtonRoles.button);
 
     await user.click(button);
 
@@ -74,7 +74,7 @@ describe("<Button />", () => {
       loading: true,
       intent: "secondary",
     });
-    const loader = screen.getByRole("button");
+    const loader = screen.getByRole(ButtonRoles.button);
 
     const className = loader.getAttribute("class");
 
